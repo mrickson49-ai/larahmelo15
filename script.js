@@ -6,7 +6,7 @@ a.volume=.72;
 const repoBase=location.hostname.endsWith('github.io')?'/larahmelo15/':'/';
 const assetBase=repoBase+'assets/';
 async function assembleAsset(prefix,count,mime){const parts=await Promise.all(Array.from({length:count},(_,i)=>fetch(assetBase+prefix+'-'+String(i).padStart(2,'0')+'.txt').then(r=>{if(!r.ok)throw new Error('asset '+r.status);return r.text()})));return 'data:'+mime+';base64,'+parts.join('')}
-const assetsReady=(async()=>{const[photo,music]=await Promise.all([assembleAsset('photo',6,'image/avif'),assembleAsset('music',15,'audio/ogg')]);document.getElementById('heroPhoto').src=photo;a.src=music;a.load()})();
+const assetsReady=(async()=>{const[photo,music]=await Promise.all([assembleAsset('photo35',3,'image/avif'),assembleAsset('music12',7,'audio/ogg')]);document.getElementById('heroPhoto').src=photo;a.src=music;a.load()})();
 function syncMusicUI(){const playing=!a.paused&&!a.ended;p.textContent=playing?'❚❚':'▶';f.textContent=playing?'♪':'♫';f.classList.toggle('playing',playing)}
 async function startMusic(){try{await assetsReady;await a.play();gate.classList.remove('show');syncMusicUI();return true}catch(err){gate.classList.add('show');syncMusicUI();return false}}
 function toggle(){if(a.paused||a.ended){if(a.ended)a.currentTime=0;startMusic()}else{a.pause();syncMusicUI()}}
